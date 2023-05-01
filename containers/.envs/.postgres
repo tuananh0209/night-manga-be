@@ -1,0 +1,19 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=localhost
+POSTGRES_DB=1
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=1
+POSTGRES_PORT=5432
+
+# PGBouncer
+# ------------------------------------------------------------------------------
+PGBOUNCER_VERSION=1.14.0
+DATABASES_HOST=postgres
+DATABASES_CLIENT_SIDE_DBNAME=when_where
+DATABASES_DBNAME=when_where
+DATABASES_USER=when_where
+DATABASES_PASSWORD=123456
+DATABASES_PORT=5432
+DATABASES_POOL_SIZE=20
+DATABASES_POOL_MODE=session

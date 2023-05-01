@@ -8,14 +8,15 @@ from rest_framework import renderers
 
 from users.api.serializers import UserSerializer, GroupSerializer
 from users.models import User
+from core.utils import decrypt_image
 
 from django.contrib.auth.views import LoginView
 
 
 # Create your views here.
 class CustomRenderer(renderers.BaseRenderer):
-    media_type = 'image/png'
-    format = 'png'
+    media_type = 'image/jpeg'
+    format = 'jpg'
     charset = None
     render_style = 'binary'
 
@@ -24,15 +25,20 @@ class CustomRenderer(renderers.BaseRenderer):
 
 
 class TestView(APIView):
-    # renderer_classes = (CustomRenderer,)
+    renderer_classes = (CustomRenderer,)
 
     def get(self, request, *args, **kwargs):
         url = request.META.get('HTTP_REFERER')
-        if not url:
-            img = ''
-            return Response(data=request.user.username, content_type='*/*')
-        else:
-            return Response({'current_site': url}, status=status.HTTP_403_FORBIDDEN)
+        # if not url:
+            # img = ''
+        a = User.objects.filter(email='a@a.com').first()
+        # fin = open(a.avatar.path, 'rb')
+        # file = fin.read()
+        file = decrypt_image(a.avatar.path)
+        
+        return Response(data=file, content_type='*/*')
+        # else:
+        #     return Response({'current_site': url}, status=status.HTTP_403_FORBIDDEN)
 
 
 class UserList(generics.ListCreateAPIView):

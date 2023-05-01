@@ -16,7 +16,7 @@ api/logs/*
 !api/logs/.gitkeep
 !backups/.gitkeep
 api/celerybeat*
-
+apps/media/*
 containers/data
 containers/.envs/.local
 containers/.envs/.development

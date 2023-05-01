@@ -1,0 +1,6 @@
+# General
+# ------------------------------------------------------------------------------
+USE_DOCKER=yes
+ENVIRONMENT=development
+DATABASE_URL=postgres://postgres:1@localhost:6432/postgres
+DJANGO_ALLOWED_HOSTS = *

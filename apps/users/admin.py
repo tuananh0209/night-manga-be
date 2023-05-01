@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from core.admin import StaffAdmin
 from users.forms import CustomUserChangeForm, CustomUserCreationForm
 from users.models import User
-
+from core.utils import encrypt_image, decrypt_image
 
 class UserAdmin(AuthUserAdmin, StaffAdmin):
     form = CustomUserChangeForm
@@ -57,6 +57,13 @@ class UserAdmin(AuthUserAdmin, StaffAdmin):
         if obj.email == "":
             obj.email = None
         super().save_model(request, obj, form, change)
+        # decrypt_image(path=obj.avatar.path) 
+        # encrypt_image(path=obj.avatar.path)
+           
+        if obj.avatar and change and 'avatar' in form.changed_data:
+            avatar = obj.avatar
+            if avatar:
+                encrypt_image(path=avatar.path)
 
     def delete_model(self, request, obj):
         return super().delete_model(request, obj)

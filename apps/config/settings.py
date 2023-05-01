@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-=(ef2&o087h(d==h2&(r+rtc^1q(%&l$-aso@@$+%qtx!4&91@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'localhost:8000']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 DJANGO_APPS = [
@@ -40,13 +40,15 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
+    # 'django.contrib.sites',
 ]
 
 THIRD_PARTY = [
     'rest_framework',
     'oauth2_provider',
     "corsheaders",
+    'django_celery_results',
+    'django_celery_beat',
 ]
 
 LOCAL_APPS = [
@@ -147,7 +149,8 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     "PAGE_SIZE": env.int("PAGE_SIZE", 20),
-    "PAGINATE_BY_PARAM": "page_size",  # Allow client to override, using `?page_size=xxx`.
+    # Allow client to override, using `?page_size=xxx`.
+    "PAGINATE_BY_PARAM": "page_size",
     "MAX_PAGINATE_BY": 500,
     "DEFAULT_AUTHENTICATION_CLASSES": (
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
@@ -186,3 +189,18 @@ CORS_ALLOW_HEADERS = (
     "client-id",
     "app-version",
 )
+
+# encryption
+AES_KEY = b'1234567890123456'
+IV_KEY = b'1234567890123456'
+
+# redis
+REDIS_URL = env.str('REDIS_URL', 'redis://localhost:6379/1')
+
+# celery
+BROKER_URL = env('CELERY_BROKER_URL')
+CELERYD_MAX_TASKS_PER_CHILD = 10
+CELERYD_TASK_SOFT_TIME_LIMIT = 1200  # 20 minutes
+CELERY_RESULT_BACKEND = "django-db"
+CELERY_IGNORE_RESULT = False
+CELERY_CACHE_BACKEND = 'default'

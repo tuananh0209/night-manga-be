@@ -1,6 +1,6 @@
 import os
 import uuid
-
+from core.utils import encrypt_image
 
 def gen_user_avatar_name(instance, filename):
     file_extension = os.path.splitext(filename)[1]
