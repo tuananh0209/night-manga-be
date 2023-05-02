@@ -40,7 +40,7 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.contrib.sites',
+    'django.contrib.sites',
 ]
 
 THIRD_PARTY = [
@@ -60,7 +60,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY + LOCAL_APPS
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
-    'django.middleware.security.SecurityMiddleware',
+    # 'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
@@ -166,8 +166,9 @@ REST_FRAMEWORK = {
 
 OAUTH2_PROVIDER = {
     'OAUTH2_BACKEND_CLASS': 'oauth2_provider.oauth2_backends.JSONOAuthLibCore',
-    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'},
-    "ACCESS_TOKEN_EXPIRE_SECONDS": 3600*24*30*12
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'comment': 'Comment', 'user': 'User',
+               'groups': 'Access to your groups'},
+    "ACCESS_TOKEN_EXPIRE_SECONDS": 3600 * 24 * 30 * 12
 }
 CORS_ALLOW_CREDENTIALS = True
 
@@ -204,3 +205,5 @@ CELERYD_TASK_SOFT_TIME_LIMIT = 1200  # 20 minutes
 CELERY_RESULT_BACKEND = "django-db"
 CELERY_IGNORE_RESULT = False
 CELERY_CACHE_BACKEND = 'default'
+
+SITE_ID = 1

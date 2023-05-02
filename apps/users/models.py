@@ -17,4 +17,4 @@ class User(AbstractUser):
     avatar = models.ImageField(null=True, blank=True, upload_to=gen_user_avatar_name)
 
     def __str__(self):
-        return self.username        
+        return self.username
